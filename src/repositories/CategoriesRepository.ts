@@ -1,13 +1,11 @@
 import { Category } from "../model/Category";
+import { ICategoriesRepository, ICreateCategoryDTO } from "./ICategoriesRepository";
 
 // a layer to treat data, so routes can be free of this kind of task
 
 // DTO -> Data Transfer object
-interface ICreateCategoryDTO {
-  name: string;
-  description: string;
-}
-class CategoriesRepository {
+
+class CategoriesRepository implements ICategoriesRepository {
   private categories: Category[];
 
   constructor() {
@@ -15,8 +13,8 @@ class CategoriesRepository {
   }
 
   // creates a new category repo method
-  create({ name, description }: ICreateCategoryDTO): void {
-    
+  create({ name, description } :  ICreateCategoryDTO): void {
+
     // uuid initializes here
     const categoriesArray = new Category()
 
