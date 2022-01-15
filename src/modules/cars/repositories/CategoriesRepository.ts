@@ -26,7 +26,6 @@ class CategoriesRepository implements ICategoriesRepository {
       }
     );
 
-    console.log(categoriesArray)
     this.categories.push(categoriesArray)
   }
 
