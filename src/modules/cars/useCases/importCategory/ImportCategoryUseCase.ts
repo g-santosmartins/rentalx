@@ -32,6 +32,8 @@ class ImportCategoryUseCase {
         })
       })
       .on("end", () => {
+        /** Removes the file after the upload */
+        fs.promises.unlink(file.path)
         resolve(categories)
       })
       .on("error", (err) => {
