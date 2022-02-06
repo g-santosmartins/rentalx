@@ -4,52 +4,61 @@ import {
   ICreateCategoryDTO
 } from "../ICategoriesRepository";
 
+import { getRepository, Repository } from 'typeorm'
+
 // a layer to treat data, so routes can be free of this kind of task
 
 // DTO -> Data Transfer object
 
-class CategoriesRepository implements ICategoriesRepository {
-  private categories: Category[];
+class CategoriesRepository
+  implements ICategoriesRepository {
+
+  private repository: Repository<Category>
 
   private static INSTANCE: CategoriesRepository;
 
-  private constructor() {
-    this.categories = []
+  constructor() {
+    this.repository = getRepository(Category)
   }
 
-  // if there is a INSTANCE of it, returns it. else: creates one and returns it tho
-  public static getInstance(): CategoriesRepository {
-    if (!CategoriesRepository.INSTANCE) {
-      CategoriesRepository.INSTANCE = new CategoriesRepository();
-    }
-    return CategoriesRepository.INSTANCE
-  }
+  // public static getInstance(): CategoriesRepository {
+  //   if (!CategoriesRepository.INSTANCE) {
+  //     CategoriesRepository.INSTANCE = new CategoriesRepository();
+  //   }
+  //   return CategoriesRepository.INSTANCE
+  // }
 
   // creates a new category repo method
-  create({ name, description }: ICreateCategoryDTO): void {
+  async create({ name, description }: ICreateCategoryDTO):  Promise<void>{
 
-    // uuid initializes here
-    const categoriesArray = new Category()
+    // // uuid initializes here
+    // const categoriesArray = new Category()
 
-    Object.assign(categoriesArray,
-      {
-        name,
-        description,
-        createdAt: new Date(),
-      }
-    );
+    // Object.assign(categoriesArray,
+    //   {
+    //     name,
+    //     description,
+    //     createdAt: new Date(),
+    //   }
+    // );
+   const category = this.repository.create({
+      description,
+      name,
+   })
 
-    this.categories.push(categoriesArray)
+    await this.repository.save(category)
+
   }
 
   // lists all categories repo method
-  list(): Category[] {
-    return this.categories
+  async list(): Promise<Category[]>{
+    const categories = await this.repository.find()
+    return categories
   }
 
   // Validates if the name was repeated
-  findByName(name: string): Category {
-    const category = this.categories.find((category) => category.name === name)
+  async findByName(name: string): Promise<Category> {
+    const category = await this.repository.findOne({name})
     return category
   }
 }
