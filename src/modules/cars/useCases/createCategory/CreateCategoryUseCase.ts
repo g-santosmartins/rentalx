@@ -1,15 +1,19 @@
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository"
-
+import {inject, injectable} from 'tsyringe'
+import { CategoriesRepository } from "../../repositories/implementations/CategoriesRepository"
 
 interface IRequest {
   name: string
   description: string
 }
 
+@injectable()
 class CreateCategoryUseCase {
 
   // Little hack with private here
-  constructor(private categoriesRepository: ICategoriesRepository) {}
+  constructor(
+    @inject(CategoriesRepository)
+    private categoriesRepository: ICategoriesRepository) {}
 
   async execute({ name, description }: IRequest): Promise<void> {
 

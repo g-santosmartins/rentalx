@@ -1,10 +1,14 @@
+// tsyringe needs it right into the top lev
+import "reflect-metadata" 
 import express from 'express';
-import './database'
-import { router } from './routes';
+
 import swaggerUi from 'swagger-ui-express';
 
 import swaggerFile from './swagger.json'
 
+import './shared/container'
+import './database'
+import { router } from './routes';
 
 const app = express()
 

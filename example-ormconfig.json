@@ -1,0 +1,15 @@
+{
+  "type": "typeDB",
+  "port": "0000",
+  "host": "host",
+  "username": "usernameDB",
+  "password": "passwordDB",
+  "database": "rentx",
+
+
+  "migrations": ["./src/database/migrations/*.ts"],
+
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  }
+}

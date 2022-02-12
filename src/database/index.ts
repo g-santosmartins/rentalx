@@ -2,7 +2,7 @@ import "reflect-metadata"
 import {createConnection} from 'typeorm'
 import { Category } from '../modules/cars/entities/Category';
 
-
+// it's necessary to specificate the entities
 createConnection({
     type: "postgres",
     host: "localhost",
