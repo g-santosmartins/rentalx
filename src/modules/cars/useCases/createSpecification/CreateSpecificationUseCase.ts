@@ -1,3 +1,5 @@
+import { inject, injectable } from "tsyringe";
+import { isFunctionDeclaration } from "typescript";
 import { ISpecificationsRepository } from "../../repositories/ISpecificationRepository";
 
 
@@ -6,9 +8,12 @@ interface IRequest {
   description: string;
 }
 
+@injectable()
 class CreateSpecificationUseCase {
 
-  constructor(private specificationsRepository: ISpecificationsRepository) { }
+  constructor(
+    @inject("SpecificationsRepository")
+    private specificationsRepository: ISpecificationsRepository) { }
 
   execute({ name, description }: IRequest): void {
 
@@ -26,3 +31,8 @@ class CreateSpecificationUseCase {
 
 
 export { CreateSpecificationUseCase }
+
+
+name => console.log(name) //arrow functions
+
+
