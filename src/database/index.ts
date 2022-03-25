@@ -1,5 +1,6 @@
 import "reflect-metadata"
 import {createConnection} from 'typeorm'
+import { User } from "../modules/accounts/entities/user";
 import { Category } from '../modules/cars/entities/Category';
 
 // it's necessary to specificate the entities
@@ -10,8 +11,10 @@ createConnection({
     username: "docker",
     password: "ignite",
     database: "rentx",
+    // remember to always come here to put the entities
     entities: [
-        Category
+        Category,
+        User,
     ],
     synchronize: true,
     logging: false
