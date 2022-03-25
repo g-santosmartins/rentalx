@@ -3,6 +3,7 @@ import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { User } from "../../entities/user";
 import { IUsersRepository } from "../IUsersRepository";
 
+
 class UsersRepository implements IUsersRepository {
 
 
@@ -11,10 +12,12 @@ class UsersRepository implements IUsersRepository {
   constructor() {
     this.repository = getRepository(User)
   }
-  async create({ name, username, email, driver_license, password }: ICreateUserDTO): Promise<void> {
+  findByEmail(email: string) {
+    throw new Error("Method not implemented.");
+  }
+  async create({ name,  email, driver_license, password }: ICreateUserDTO): Promise<void> {
     const user = this.repository.create({
       name,
-      username,
       email,
       driver_license,
       password
