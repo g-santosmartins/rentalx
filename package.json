@@ -8,7 +8,9 @@
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "bcrypt": "^5.0.1",
     "csv-parse": "^5.0.4",
     "eslint": "^7.12.1",
     "eslint-config-standard": "^16.0.3",
