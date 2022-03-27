@@ -11,7 +11,7 @@ interface IRequest {
   password: string
 }
 
-interface IReponse {
+interface IResponse {
   user: {
     name: string,
     email: string
@@ -27,7 +27,7 @@ class AuthenticateUserUseCase {
     @inject("UsersRepository")
     private usersRepository: IUsersRepository
   ) { }
-  async execute({ email, password }: IRequest): Promise<IReponse> {
+  async execute({ email, password }: IRequest): Promise<IResponse> {
 
     const user = await this.usersRepository.findByEmail(email)
 
@@ -51,12 +51,16 @@ class AuthenticateUserUseCase {
       expiresIn: "1d"
     })
 
+    const tokenReturn: IResponse = {
+      token,
+      user: {
+        name: user.name,
+        email: user.email
+      }
+    }
 
     // returning user and token to who requests it
-    return {
-      user,
-      token
-    }
+    return tokenReturn
   }
 }
 
