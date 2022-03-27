@@ -10,10 +10,10 @@ class SpecificationsRepository implements ISpecificationsRepository {
   private specifications: Specification[]
 
   constructor() {
-    this.specifications = []
+    this.repository = getRepository(Specification)
+    
   }
-
-  async create({ description, name }: ICreateSpecificationDTO) {
+  async create({ description, name }: ICreateSpecificationDTO): Promise<void> {
     const specification = this.repository.create({
       name,
       description,
@@ -23,14 +23,15 @@ class SpecificationsRepository implements ISpecificationsRepository {
     await this.repository.save(specification)
   }
 
+   // lists all specifications repo method
   async list() : Promise<Specification[]> {
-    return this.specifications
+    const specifications = await this.repository.find()
+    return specifications
   }
 
-  async findByName(name: string): Promise<Specification> {
-    const specification = this.specifications.find(
-      specification => specification.name === name
-    )
+   // Validates if the name was repeated
+   async findByName(name: string): Promise<Specification> {
+    const specification = await this.repository.findOne({name})
     return specification
   }
 }

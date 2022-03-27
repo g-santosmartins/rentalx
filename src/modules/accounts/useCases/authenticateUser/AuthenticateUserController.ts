@@ -4,7 +4,6 @@ import { container } from "tsyringe";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
 
-
 class AuthenticateUserController {
   constructor() {
 
