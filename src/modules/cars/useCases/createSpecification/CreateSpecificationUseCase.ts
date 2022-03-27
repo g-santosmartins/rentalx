@@ -1,5 +1,4 @@
 import { inject, injectable } from "tsyringe";
-import { isFunctionDeclaration } from "typescript";
 import { ISpecificationsRepository } from "../../repositories/ISpecificationRepository";
 
 
@@ -10,29 +9,28 @@ interface IRequest {
 
 @injectable()
 class CreateSpecificationUseCase {
-
   constructor(
     @inject("SpecificationsRepository")
-    private specificationsRepository: ISpecificationsRepository) { }
+    private specificationsRepository: ISpecificationsRepository
+  ) {}
 
-  execute({ name, description }: IRequest): void {
+  async execute({ name, description }: IRequest): Promise<void> {
+    const specificationAlreadyExists = await this.specificationsRepository.findByName(
+      name
+    );
 
-    const specificationAlreadExists = this.specificationsRepository.findByName(name);
-
-    if (specificationAlreadExists) {
-      throw new Error("Specification already exists!")
+    if (specificationAlreadyExists) {
+      throw new Error("Specification already exists!");
     }
-    this.specificationsRepository.create({
+
+    await this.specificationsRepository.create({
       name,
-      description
-    })
+      description,
+    });
   }
 }
 
+export { CreateSpecificationUseCase };
 
-export { CreateSpecificationUseCase }
-
-
-name => console.log(name) //arrow functions
 
 

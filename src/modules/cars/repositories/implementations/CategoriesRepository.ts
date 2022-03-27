@@ -20,27 +20,8 @@ class CategoriesRepository
   constructor() {
     this.repository = getRepository(Category)
   }
-
-  // public static getInstance(): CategoriesRepository {
-  //   if (!CategoriesRepository.INSTANCE) {
-  //     CategoriesRepository.INSTANCE = new CategoriesRepository();
-  //   }
-  //   return CategoriesRepository.INSTANCE
-  // }
-
-  // creates a new category repo method
   async create({ name, description }: ICreateCategoryDTO):  Promise<void>{
 
-    // // uuid initializes here
-    // const categoriesArray = new Category()
-
-    // Object.assign(categoriesArray,
-    //   {
-    //     name,
-    //     description,
-    //     createdAt: new Date(),
-    //   }
-    // );
    const category = this.repository.create({
       description,
       name,
@@ -49,10 +30,10 @@ class CategoriesRepository
     await this.repository.save(category)
 
   }
-
   // lists all categories repo method
   async list(): Promise<Category[]>{
     const categories = await this.repository.find()
+    console.log(categories)
     return categories
   }
 

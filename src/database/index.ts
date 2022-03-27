@@ -2,6 +2,7 @@ import "reflect-metadata"
 import {createConnection} from 'typeorm'
 import { User } from "../modules/accounts/entities/user";
 import { Category } from '../modules/cars/entities/Category';
+import { Specification } from "../modules/cars/entities/Specification";
 
 // it's necessary to specificate the entities
 createConnection({
@@ -15,6 +16,7 @@ createConnection({
     entities: [
         Category,
         User,
+        Specification
     ],
     synchronize: true,
     logging: false
