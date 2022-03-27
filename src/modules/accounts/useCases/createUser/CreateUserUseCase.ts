@@ -3,6 +3,7 @@ import { inject, injectable } from "tsyringe";
 import { hash } from 'bcrypt'
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { AppError } from "../../../../errors/AppError";
 
 @injectable()
 class CreateUserUseCase {
@@ -21,7 +22,7 @@ class CreateUserUseCase {
 
 
     if(userAlreadyExists) {
-      throw new Error("User already exists")
+      throw new AppError("User already exists")
     }
 
     // used to encrypt the password and the number is passed to difficult the hash reverse conversion

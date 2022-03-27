@@ -15,13 +15,10 @@ const listSpecificationController = new ListCategoriesController()
 
 specificationsRoutes.post("/", (request: Request, response: Response) => {
   return createSpecificationController.handle(request, response)
- 
 })
 
 specificationsRoutes.get("/", (request: Request, response: Response) => {
   return listSpecificationController.handle(request, response)
 })
-
-
 
 export {specificationsRoutes}
