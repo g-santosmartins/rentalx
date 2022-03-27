@@ -29,6 +29,7 @@ class User {
     if (!this.id) {
       this.id = uuidV4()
     }
+    // not a admin by default
     this.isAdmin = false
   }
 }
