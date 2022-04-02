@@ -10,7 +10,7 @@ export default {
       // saving file
       storage: multer.diskStorage({
         // going to root
-        destination: resolve(__dirname,  "..", "..", "tmp"),
+        destination: resolve(__dirname,  "..", "..", folder),
         filename: (request, file, callback) => {
           // generating hexadecimal hash to compose filename
           const fileHash = crypto.randomBytes(16).toString("hex")
