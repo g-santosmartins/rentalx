@@ -34,6 +34,11 @@ export default async function ensureAuthenticated(request: Request, reponse: Res
       throw new AppError("User does not exists!", 401)
     }
 
+    // passing user user by param
+    request.user = {
+      id: user_id
+    }
+
     // it needs a next() to procedure
     next()
 
