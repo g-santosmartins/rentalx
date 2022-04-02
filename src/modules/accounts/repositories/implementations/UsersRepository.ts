@@ -12,20 +12,29 @@ class UsersRepository implements IUsersRepository {
     // getRepository from TypeORM
     this.repository = getRepository(User)
   }
-  
-  async create({ name,  email, driver_license, password }: ICreateUserDTO): Promise<void> {
+
+  async create({
+    name,
+    email,
+    driver_license,
+    password,
+    avatar,
+    id
+  }: ICreateUserDTO): Promise<void> {
     const user = this.repository.create({
       name,
       email,
       driver_license,
-      password
+      password,
+      avatar,
+      id
     })
 
     await this.repository.save(user)
   }
 
   async findByEmail(email: string): Promise<User> {
-    const user = await this.repository.findOne({email})
+    const user = await this.repository.findOne({ email })
     return user
   }
 
