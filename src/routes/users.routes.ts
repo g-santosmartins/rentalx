@@ -21,7 +21,7 @@ const listUsersController = new ListUsersController()
 // user routes
 usersRoutes.post('/', createUserController.handle);
 
-usersRoutes.get('/', listUsersController.handle)
+usersRoutes.get('/',ensureAuthenticated, listUsersController.handle)
 
 usersRoutes.patch(
   '/avatar',
