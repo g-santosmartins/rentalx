@@ -42,6 +42,18 @@ class UsersRepository implements IUsersRepository {
     const user = await this.repository.findOne(id)
     return user
   }
+ // lists all categories repo method
+//  async list(): Promise<Category[]>{
+//   const categories = await this.repository.find()
+//   console.log(categories)
+//   return categories
+// }
+   async list(): Promise<User[]> {
+     const users = await this.repository.find()
+
+     console.log(users)
+     return users
+   }
 }
 
 export { UsersRepository }
