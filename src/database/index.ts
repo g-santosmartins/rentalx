@@ -22,4 +22,4 @@ createConnection({
     logging: false
 }).then(connection => {
     // here you can start to work with your entities
-}).catch(error => console.log(error));
+}).catch(error => console.log("Houve um erro na conexão de banco de dados", "ERRO:",error));
