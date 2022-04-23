@@ -1,7 +1,4 @@
 // first test how to write tests
-
-import { Not } from "typeorm"
-
 // Block - unit testes
 describe("Criar categoria", () => {
 

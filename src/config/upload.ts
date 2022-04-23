@@ -14,6 +14,8 @@ export default {
         filename: (request, file, callback) => {
           // generating hexadecimal hash to compose filename
           const fileHash = crypto.randomBytes(16).toString("hex")
+
+          // generationg file name
           const fileName = `${fileHash}-${file.originalname}`
 
           return callback(null, fileName)
