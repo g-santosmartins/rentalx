@@ -10,7 +10,7 @@ class ListUsersController {
 
     const listOfUsers =  await listUsersUseCase.execute();
 
-    // filtering the password function
+    // filtering the password function - refactor
     const listOfUsersFiltered = []
     listOfUsers.map((item) => {
       delete item.password
